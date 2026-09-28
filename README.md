@@ -1,32 +1,39 @@
 # KEN2110-Project: Online Fraud
 
-This is a small database project about fraud reports. It stores who was scammed, what kind of scam it was, how it happened and what it did to that person.
+This is a small database project about online fraud. It stores who was scammed, what kind of scam it was, how it happened, what it did to that person and whether they reported it.
 
-# What is SQL? 
+# Why online fraud?
 
-SQL is a way of giving instructions to a database. Every file in this project is written in SQL. You open the program, paste the code in and click a botton to run it. 
+In 2025, about 1 in 6 Dutch people were a victim of online crime, and 1 in 10 were scammed online (CBS, 2026). Many people think they can easily spot a scam, but 4 in 10 overestimate themselves, and people under 34 are the most vulnerable (NOS, 2025). On top of that, only 15% of victims go to the police, so most fraud stays invisible.
 
-# What is inside the database?
+With this database we want to find out who is most likely to become a victim and how reporting differs between groups.
 
-A database is made of tables, with rows and columns. This database has 7 tables: 
-- Person: one row per person who was affected by fraud
-- Organisation: places you can report fraud to
-- Fraud_type: the kind of fraud
-- Communication_channel: how he fraud reached the person
-- Fraud_incident: who it happened to, what kind it was and how
-- Report: a record of a fraud incident being reported to an organisation
-- Consequences: what harm the fraud caused
+# Stakeholders
+
+Our stakeholders are the Ministry of Justice and Security and the police. Our results show them which groups to warn, and which groups rarely report fraud.
 
 # Files in this project
 
+- ERD - Online Fraud.pdf: a drawing of the 7 tables and how they are connected
+- Normalization of the ERD.pdf: step-by-step explanation of 1NF, 2NF and 3NF, with before/after examples
 - Schema.sql: builds the 7 empty tables
-- Mock_data.sql: fills those tables with example data
-- Advanced_queries.sql: asks which organisation gets the most fraud reports, how the average money lost differs by age group and channel and which people were victems more than once
+- Mock_Data.sql: fills the tables with made-up example data
+- Advanced_Queries.sql: asks which organisation gets the most fraud reports, how the average money lost differs by age group and channel, and which people were victims more than once
 
-# How the tables are connected
+# The ERD explained
 
-Some tables point to other tables. For example, every Fraud_Incident row points to one Person, one Fraud_Type, and one Communication_Channel. That is how the database knows who it happened to, what kind it was and how. 
+A database is made of tables, with rows and columns. The centre of our database is Fraud_Incident: one fraud case. Every case is linked to:
 
-If you delete a Fraud_Incident, its related Report and Consequences rows get deleted automatically too, since they don't make sense without it.
+- Person: who it happened to (age, occupation, income, education, gender)
+- Fraud_Type: what kind of fraud it was, for example phishing
+- Communication_Channel: how it reached the person, for example email or social media
+- Consequences: what harm it caused (emotional and/or financial)
+- Report: whether it was reported, and to which Organisation (for example the police or a bank)
 
-But you can't delete a Person, Fraud_Type, Channel, or Organisation if it's still being used somewhere in the data, because the database blocks that on purpose, so you don't accidentally break a link.
+One person can have several fraud cases, and one case can be reported to several organisations. Because everything is linked, we can follow a person from who they are, to what happened, to who they told.
+
+If you delete a fraud case, its reports and consequences are deleted too. But you can't delete a person, fraud type, channel or organisation that is still in use, so no links break by accident.
+
+# How to run it
+
+SQL is a way of giving instructions to a database. We use SQLite: open the program, paste in the code and click a button to run it. Run Schema.sql first, then Mock_Data.sql, then Advanced_Queries.sql.
