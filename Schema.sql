@@ -2,7 +2,6 @@
 
 CREATE TABLE Person (
     Person_ID       INTEGER PRIMARY KEY,
-    Age             INTEGER CHECK (Age BETWEEN 0 AND 120),
     Age_range       TEXT CHECK (Age_range GLOB '[0-9]*'), 
     Occupation      TEXT,
     Income          REAL CHECK (Income >= 0),
