@@ -2,7 +2,8 @@
 
 CREATE TABLE Person (
     Person_ID       INTEGER PRIMARY KEY,
-    Age             INTEGER NOT NULL CHECK (Age BETWEEN 0 AND 120),
+    Age             INTEGER CHECK (Age BETWEEN 0 AND 120),
+    Age_range       TEXT CHECK (Age_range GLOB '[0-9]*'), 
     Occupation      TEXT,
     Income          REAL CHECK (Income >= 0),
     Education_level TEXT,
@@ -31,7 +32,7 @@ CREATE TABLE Fraud_Incident (
     Person_ID             INTEGER NOT NULL,
     Incident_date         DATE NOT NULL,
     Channel_ID            INTEGER NOT NULL,
-    Financial_loss_amount REAL NOT NULL CHECK (Financial_loss_amount >= 0),
+    Financial_loss_amount REAL CHECK (Financial_loss_amount >= 0),
 
     FOREIGN KEY (Fraud_type_ID) REFERENCES Fraud_Type(Fraud_type_ID)
         ON UPDATE CASCADE ON DELETE RESTRICT,
