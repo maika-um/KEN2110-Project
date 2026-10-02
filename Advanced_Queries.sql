@@ -17,10 +17,6 @@ WITH bracketed AS (
                 fi.Financial_loss_amount,
                 cc.Channel_kind,
                 CASE
-                    WHEN p.Age < 30 THEN 'Under 30'
-                    WHEN p.Age BETWEEN 30 AND 49 THEN '30-49'
-                    WHEN p.Age BETWEEN 50 AND 64 THEN '50-64'
-                    WHEN p.Age >= 70                               THEN '70+'
                     WHEN p.Age_range IN ('1-9', '10-19', '20-29')  THEN 'Under 30'
                     WHEN p.Age_range IN ('30-39', '40-49')         THEN '30-49'
                     WHEN p.Age_range IN ('50-59', '60-69')         THEN '50-69'
@@ -53,7 +49,7 @@ WITH bracketed AS (
 SELECT
             p.Person_ID,
             p.Occupation,
-            p.Age,
+            p.Age_range,
             COUNT(fi.Fraud_incident_ID)               AS incident_count,
             ROUND(SUM(fi.Financial_loss_amount), 2)   AS total_loss
         FROM Person p
