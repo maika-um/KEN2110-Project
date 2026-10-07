@@ -37,6 +37,22 @@ One person can have several fraud cases, and one case can be reported to several
 
 If you delete a fraud case, its reports and consequences are deleted too. But you can't delete a person, fraud type, channel or organisation that is still in use, so no links break by accident.
 
+# Advanced Queries
+1. Organisations ranked by number of reports received (maika-um)
+The first query looks at which companies are receiving reports and how the amounts of reports differ between the companies. 
+
+2. Average loss by age bracket, ranked within each bracket by channel (maika-um)
+This query looks at for a given age group, which contact method (e-mail, phone, social media, etc.) tends to cause the biggest financial loss.
+
+3. Repeat victims: people with more than one incident, total loss (maika-um)
+The third query looks at who has been targeted by fraud more than once and what the cumulative financial damage for those people is.
+
+# Limitations
+..
+
+# Reflection & future work
+..
+
 # How to run it
 
 This project uses SQLite. To run the SQL code, execute the files in the following order:
