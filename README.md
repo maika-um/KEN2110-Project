@@ -50,11 +50,31 @@ If you delete a fraud case, its reports and consequences are deleted too. But yo
 - Looks at who has been targeted by fraud more than once and what the cumulative financial damage for those people is.
 - *Relevance to the societal problem*: A person who has already been a victim to online fraud once, is often more vulnerable to being targeted again. The combined financial harm is invisible if you only look at one incident at a time. Identifying repeat victims allows for more targeted protection for people at a higher risk.
 
+**Losing money by age group: Canada vs United States** (LoraJacobs)
+- Compares per age range how often a fraud report includes a money loss and how big the loss is, in the CAFC and FTC data.
+- *Relevance to the societal problem*: In the US data younger people lose money more often, but older people lose more when they do. So both groups need a warning, but a different one. This helps the Ministry and police decide which message to give to which age group.
+
+**Most harmful contact methods: Canada vs United States** (LoraJacobs)
+- Compares per contact method how often fraud leads to a money loss and how big the loss is, in the CAFC and FTC data.
+- *Relevance to the societal problem*: In both countries fraud through social media and websites most often leads to a money loss, while email and text messages are reported a lot but less often lead to a loss. This shows which channels warnings should focus on.
+
 # Limitations
-..
+- The FTC data only has yearly totals, not individual reports. Because of this it can't be linked to a person or incident, and it had to be stored in separate tables (Report_Count and Loss_Statistic).
+- The CAFC data is a sample of 200 reports, so averages per group are based on few cases and one large loss can change them a lot.
+- Both datasets come from Canada and the US. We have no Dutch data, while our societal problem and stakeholders are Dutch.
+- Both datasets only contain fraud that was reported. Fraud that people never report, which is a big part of our problem, is not in the data.
+- The age groups are not the same in both datasets ("0-19" and "80+" in FTC, "10-19" and "80-89" in CAFC), so these can't be compared.
 
 # Reflection & future work
-..
+
+Adding real data showed that our schema was made for individual cases, while a lot of open data only has totals. We had to add two new tables for the FTC data and change how age is stored.
+
+The results fit our societal problem and the stakeholder video: fraud is not only a problem for older people. Younger people lose money more often, older people lose more per case, and fraud through social media most often leads to a money loss. This can help the Ministry of Justice and Security and the police decide who to warn and through which channel.
+
+Future work:
+- Add Dutch data, for example from CBS or the police, so the results apply to the Netherlands.
+- Add data on people who did not report fraud, so we can actually answer how reporting differs between groups.
+- Make the age groups the same in all data, so they can be compared.
 
 # How to run it
 
