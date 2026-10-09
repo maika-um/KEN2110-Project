@@ -39,13 +39,16 @@ If you delete a fraud case, its reports and consequences are deleted too. But yo
 
 # Advanced Queries
 **Organisations ranked by number of reports received** (maika-um)
-- Checks which companies are receiving reports and how the amounts of reports differ between the companies. 
+- Checks which companies are receiving reports and how the amounts of reports differ between the companies.
+- *Relevance to the societal problem*: Currently, no organisation sees the full scale of the impact of online fraud, as reports are split across banks, police and consumer organizations. This query shows where victims are actually going, which matters for deciding where prevention campaigns or victim-support resources should be concentrated.
 
 **Average loss by age bracket, ranked within each bracket by channel** (maika-um)
 - Analyses for a given age group, which contact method (e-mail, phone, social media, etc.) tends to cause the biggest financial loss.
+- *Relevance to the societal problem*: The query shows which contact methods cause the biggest losses within each age group. This makes it possible to target fraud prevention messaging at specific groups and channels, as opposed to a general "be careful online" message.
 
 **Repeat victims: people with more than one incident, total loss** (maika-um)
 - Looks at who has been targeted by fraud more than once and what the cumulative financial damage for those people is.
+- *Relevance to the societal problem*: A person who has already been a victim to online fraud once, is often more vulnerable to being targeted again. The combined financial harm is invisible if you only look at one incident at a time. Identifying repeat victims allows for more targeted protection for people at a higher risk.
 
 # Limitations
 ..
@@ -56,6 +59,6 @@ If you delete a fraud case, its reports and consequences are deleted too. But yo
 # How to run it
 
 This project uses SQLite. To run the SQL code, execute the files in the following order:
-1. Run Schema.sql
-2. Run Real Data - CAFC.sql or Real_dta_FTC.sql
+1. Run Schema_2.sql
+2. Run Real Data; first run the Real_data_CAFC.sql file, followed by Real_data_FTC.sql
 3. Run one of the queries in Advanced_Queries.sql
