@@ -66,11 +66,11 @@ If you delete a fraud case, its reports and consequences are deleted too. But yo
 - Compares per contact method how often fraud leads to a money loss and how big the loss is, in the CAFC and FTC data.
 - *Relevance to the societal problem*: In both countries fraud through social media and websites most often leads to a money loss, while email and text messages are reported a lot but less often lead to a loss. This shows which channels warnings should focus on.
   
-**Frequency vs harm per fraud type** (Marleen Lamboo)
+**Frequency vs harm per fraud type** (Marleenl)
 - Checks which fraud types are reported most often, which cause the greatest total financial loss, and how concentrated that loss is. For each type it shows the share of reports, the share of total loss, both rankings and a cumulative loss percentage.
 - *Relevance to the societal problem*: The most common type of fraud is not necessarily the most damaging. If a few fraud types cause most of the money lost, prevention campaigns and victim support should focus on those first, even when they are reported less often.
 
-**Canada vs United States: share of reports per fraud type** (Marleen Lamboo)
+**Canada vs United States: share of reports per fraud type** (Marleenl)
 - Compares which fraud types make up the largest share of reports in Canada (CAFC) and the United States (FTC 2024), and where the two countries differ most. Only fraud types that appear in both datasets are included, and shares are calculated within those shared types so the two countries can be compared even though the datasets differ in size.
 - *Relevance to the societal problem*: Online fraud does not stop at borders, but prevention is usually organised per country. This query shows which fraud types are over- or under-represented in one country compared to the other. That tells the Ministry and police whether a campaign that works in one country could be reused in another, or whether a type of fraud needs its own approach. Because the CAFC data is a sample, the differences show patterns rather than exact figures.
 
