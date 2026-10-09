@@ -97,7 +97,7 @@ SELECT
 FROM shared
 ORDER BY ABS(cafc_share_pct - ftc_share_pct) DESC;
 
--- 5. Losing money by age group: Canada (CAFC reports) vs United States (FTC 2024)
+-- 5. Losing money by age group: Canada (CAFC reports) vs United States (FTC 2024) (Lora Jacobs)
 WITH cafc AS (
     SELECT
         p.Age_range,
@@ -121,7 +121,7 @@ FROM cafc c
 JOIN Loss_Statistic ls ON ls.Age_range = c.Age_range AND ls.Report_year = 2024
 ORDER BY c.Age_range;
 
--- 6. Most harmful contact methods: Canada (CAFC reports) vs United States (FTC 2024)
+-- 6. Most harmful contact methods: Canada (CAFC reports) vs United States (FTC 2024) (Lora Jacobs)
 WITH cafc AS (
     SELECT
         fi.Channel_ID,
