@@ -1,4 +1,20 @@
--- Real world data sampled from the CAFC
+-- Real world data sampled from the Canadian Anti-Fraud Centre (CAFC) Reporting Data, Open Government Portal (Canada)
+-- Source:    https://open.canada.ca/data/en/dataset/6a09c998-cddb-4a22-beff-4dca67ab892f
+-- File:      cafc-open-gouv-database-2021-01-01-to-2025-09-30-extracted-2025-10-01.csv (data last updated 2025-10-02; first published 2023-07-10)
+-- Licence:   Open Government Licence - Canada
+-- Sample:    200 random reports (pandas sample, random_state=42) out of 227,397 reports with Complaint Type = 'Victim' and 1 victim (file: 350,361 reports)
+-- Schema changes needed before loading (edits in Schema_2.sql):
+--   Person.Age            INTEGER CHECK (Age BETWEEN 0 AND 120)          -- no longer needed, source only has age ranges
+--   Person.Age_range      TEXT                                            -- new column
+--   Fraud_Incident.Financial_loss_amount  REAL CHECK (Financial_loss_amount >= 0)   -- no longer NOT NULL
+-- Mapping notes:
+--   Incident_date and Report_date both = 'Date Received' (the source has no separate incident date).
+--   Financial_loss_amount is originally in CAD, converted to USD according to Bank of Canada annual average rate for the year of Date Received (CAD per 1 USD): 2021 1.2535, 2022 1.3013, 2023 1.3497,
+--   2024 1.3698, 2025 1.3978 (https://www.bankofcanada.ca/rates/exchange/annual-average-exchange-rates/), rounded to 2 decimals.
+--   The original CAD amount is kept in the comment at the end of each Fraud_Incident line. NULL stays NULL; 0.00 stays 0.00.
+-- NULL for Identity Fraud, Personal Info and Phishing: CAFC states loss is not determinable there (always $0 in the source).
+--   Age_range NULL = 'Not Available' or 'Deceased'; Gender NULL = 'Not Available' or 'Unknown'.
+--   Not in the source: Occupation, Income, Education_level, Consequences.
 
 -- Fraud_Type
 INSERT INTO Fraud_Type (Fraud_type_ID, Fraud_kind) VALUES (1, 'Bank Investigator');
