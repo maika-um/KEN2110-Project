@@ -58,7 +58,7 @@ SELECT
         HAVING COUNT(fi.Fraud_incident_ID) > 1
         ORDER BY total_loss DESC;
 
--- 4. Canada vs United States: share of reports per fraud type (CAFC sample vs FTC 2024), only types in both datasets
+-- 4. Canada vs United States: share of reports per fraud type (CAFC sample vs FTC 2024), only types in both datasets (Marleen Lamboo)
 WITH cafc AS (
     SELECT
         fi.Fraud_type_ID,
@@ -145,3 +145,31 @@ JOIN Communication_Channel cc ON cc.Channel_ID = ls.Channel_ID
 LEFT JOIN cafc c ON c.Channel_ID = ls.Channel_ID
 WHERE ls.Report_year = 2024
 ORDER BY ftc_loss_rank;
+
+-- 7. Frequency vs. harm: reports, total loss and cumulative share of loss per fraud type (Marleen Lamboo)
+WITH type_stats AS (
+    SELECT
+        ft.Fraud_kind,
+        COUNT(*) AS incident_count,
+        ROUND(SUM(COALESCE(fi.Financial_loss_amount, 0)), 2) AS total_loss,
+        ROUND(AVG(CASE WHEN fi.Financial_loss_amount > 0
+                       THEN fi.Financial_loss_amount END), 2) AS avg_loss_when_lost
+    FROM Fraud_Incident fi
+    JOIN Fraud_Type ft ON ft.Fraud_type_ID = fi.Fraud_type_ID
+    GROUP BY ft.Fraud_type_ID
+)
+SELECT
+    Fraud_kind,
+    incident_count,
+    ROUND(100.0 * incident_count / SUM(incident_count) OVER (), 1) AS pct_of_reports,
+    RANK() OVER (ORDER BY incident_count DESC)                      AS frequency_rank,
+    total_loss,
+    ROUND(100.0 * total_loss / SUM(total_loss) OVER (), 1)          AS pct_of_total_loss,
+    RANK() OVER (ORDER BY total_loss DESC)                          AS loss_rank,
+    ROUND(100.0 * SUM(total_loss) OVER (
+              ORDER BY total_loss DESC
+              ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)
+          / SUM(total_loss) OVER (), 1)                             AS cumulative_loss_pct,
+    avg_loss_when_lost
+FROM type_stats
+ORDER BY loss_rank;
