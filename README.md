@@ -2,6 +2,8 @@
 
 This is a small database project about online fraud. It stores information about who was scammed, what kind of scam occurred, how it happened, what impact it had on the victim and whether the incident was reported.
 
+The full database (schema + real data) is published on Zenodo: https://doi.org/10.5281/zenodo.23269463
+
 # Why online fraud?
 
 In 2025, about 1 in 6 Dutch people were victims of online crime, and 1 in 10 experienced online fraud (CBS, 2026). Many people believe they can easily spot a scam, but 4 in 10 people overestimate their ability to do so, while people under 34 are the most vulnerable (NOS, 2025). In addition, only 15% of victims report fraud to the police, meaning that a large part fraud cases stay invisible.
@@ -18,6 +20,7 @@ Our main stakeholders are the Ministry of Justice and Security and the police. T
 - Mock_Data.sql: Made-up example data to test the database, this is made to run specifically for Schema_1.sql
 - Real_data_CAFC.sql: Real world data adapted from the Canadian Anti-Fraud Centre (CAFC), can be ran with Schema_2.sql.
 - Real_data_FTC.sql: Real world data obtained from the Federal Trade Commission (FTC), can be ran with Schema_2.sql.
+- online_fraud_database_dump.sql: Database dump of Schema_2.sql with the CAFC and FTC data, also published on Zenodo. Load with: sqlite3 online_fraud.db < online_fraud_database_dump.sql
 
 **Schema folder:**
 - Schema_1.sql: Creates the empty tables, according to our ERD.
@@ -73,7 +76,6 @@ If you delete a fraud case, its reports and consequences are deleted too. But yo
 **Canada vs United States: share of reports per fraud type** (Marleenl)
 - Compares which fraud types make up the largest share of reports in Canada (CAFC) and the United States (FTC 2024), and where the two countries differ most. Only fraud types that appear in both datasets are included, and shares are calculated within those shared types so the two countries can be compared even though the datasets differ in size.
 - *Relevance to the societal problem*: Online fraud does not stop at borders, but prevention is usually organised per country. This query shows which fraud types are over- or under-represented in one country compared to the other. That tells the Ministry and police whether a campaign that works in one country could be reused in another, or whether a type of fraud needs its own approach. Because the CAFC data is a sample, the differences show patterns rather than exact figures.
-
 
 # Limitations
 - The FTC data only has yearly totals, not individual reports. Because of this it can't be linked to a person or incident, and it had to be stored in separate tables (Report_Count and Loss_Statistic).
