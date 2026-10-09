@@ -97,3 +97,51 @@ SELECT
 FROM shared
 ORDER BY ABS(cafc_share_pct - ftc_share_pct) DESC;
 
+-- 5. Losing money by age group: Canada (CAFC reports) vs United States (FTC 2024)
+WITH cafc AS (
+    SELECT
+        p.Age_range,
+        COUNT(*) AS cafc_reports,
+        ROUND(100.0 * SUM(CASE WHEN fi.Financial_loss_amount > 0 THEN 1 ELSE 0 END) / COUNT(fi.Financial_loss_amount), 1) AS cafc_pct_with_loss,
+        ROUND(AVG(CASE WHEN fi.Financial_loss_amount > 0 THEN fi.Financial_loss_amount END), 2) AS cafc_avg_loss
+    FROM Fraud_Incident fi
+    JOIN Person p ON p.Person_ID = fi.Person_ID
+    WHERE p.Age_range IS NOT NULL
+    GROUP BY p.Age_range
+)
+SELECT
+    c.Age_range,
+    c.cafc_reports,
+    c.cafc_pct_with_loss,
+    c.cafc_avg_loss,
+    ls.Number_of_reports  AS ftc_reports,
+    ls.Pct_reporting_loss AS ftc_pct_with_loss,
+    ls.Median_loss        AS ftc_median_loss
+FROM cafc c
+JOIN Loss_Statistic ls ON ls.Age_range = c.Age_range AND ls.Report_year = 2024
+ORDER BY c.Age_range;
+
+-- 6. Most harmful contact methods: Canada (CAFC reports) vs United States (FTC 2024)
+WITH cafc AS (
+    SELECT
+        fi.Channel_ID,
+        COUNT(*) AS cafc_reports,
+        ROUND(100.0 * SUM(CASE WHEN fi.Financial_loss_amount > 0 THEN 1 ELSE 0 END) / COUNT(fi.Financial_loss_amount), 1) AS cafc_pct_with_loss,
+        ROUND(AVG(CASE WHEN fi.Financial_loss_amount > 0 THEN fi.Financial_loss_amount END), 2) AS cafc_avg_loss
+    FROM Fraud_Incident fi
+    GROUP BY fi.Channel_ID
+)
+SELECT
+    cc.Channel_kind,
+    COALESCE(c.cafc_reports, 0) AS cafc_reports,
+    c.cafc_pct_with_loss,
+    c.cafc_avg_loss,
+    ls.Number_of_reports  AS ftc_reports,
+    ls.Pct_reporting_loss AS ftc_pct_with_loss,
+    ls.Median_loss        AS ftc_median_loss,
+    RANK() OVER (ORDER BY ls.Pct_reporting_loss DESC) AS ftc_loss_rank
+FROM Loss_Statistic ls
+JOIN Communication_Channel cc ON cc.Channel_ID = ls.Channel_ID
+LEFT JOIN cafc c ON c.Channel_ID = ls.Channel_ID
+WHERE ls.Report_year = 2024
+ORDER BY ftc_loss_rank;
