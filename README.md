@@ -14,14 +14,22 @@ Our main stakeholders are the Ministry of Justice and Security and the police. T
 
 # Files in this project
 
-- ERD - Online Fraud.pdf: A diagram of the tables and how they are connected
-- Normalization of the ERD.pdf: A step-by-step explanation of 1NF, 2NF and 3NF, with before/after examples
-- Integration of Real Data.pdf: Describes the sources of the real world data and changes made to the original database schema to integrate these datasets.
-- Schema.sql: Creates the empty tables 
-- Mock_Data.sql: Made-up example data to test the database
-- Real Data - CAFC.sql: Real world data adapted from the Canadian Anti-Fraud Centre (CAFC)
-- Real_data_FTC.sql: Real world data obtained from the Federal Trade Commission (FTC) 
-- Advanced_Queries.sql: Contains queries that investigate which organisation gets the most fraud reports, how the average money lost differs by age group and channel, and which people have been victims more than once
+**Data folder:**
+- Mock_Data.sql: Made-up example data to test the database, this is made to run specifically for Schema_1.sql
+- Real_data_CAFC.sql: Real world data adapted from the Canadian Anti-Fraud Centre (CAFC), can be ran with Schema_2.sql.
+- Real_data_FTC.sql: Real world data obtained from the Federal Trade Commission (FTC), can be ran with Schema_2.sql.
+
+**Schema folder:**
+- Schema_1.sql: Creates the empty tables, according to our ERD.
+- Schema_2.sql: Updated version of schema_1.sql, adjusted to accommodate the real world data.
+
+**Other files:**
+- Advanced_Queries.sql: Contains multiple queries that investigate different aspects of online fraud, offering new and specific insights from the datasets. The different queries are explained in the README.
+- ERD - Online Fraud.pdf: A diagram of the tables and how they are connected.
+- Normalization of the ERD.pdf: A step-by-step explanation of 1NF, 2NF and 3NF, with before/after examples.
+- Video Presentation - Online Fraud.MOV: A video presentation that introduces our societal challenge (online fraud), explains what our database stores/its organisation, demonstrated questions it can answer and describes limitations/future work. To play the video press "View raw".
+- Integration of Real Data.pdf: Describes the sources of the real world data and changes made to the original database schema (created Schema_2.sql) to integrate these datasets. 
+
 
 # The ERD explained
 
